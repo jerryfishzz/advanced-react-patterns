@@ -54,6 +54,7 @@ function userReducer(state, action) {
 }
 
 function UserProvider({children}) {
+  console.log('first')
   const {user} = useAuth()
   const [state, dispatch] = React.useReducer(userReducer, {
     status: null,
@@ -61,6 +62,7 @@ function UserProvider({children}) {
     storedUser: user,
     user,
   })
+  console.log(state)
   const value = [state, dispatch]
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
@@ -76,6 +78,23 @@ function useUser() {
 // 🐨 add a function here called `updateUser`
 // Then go down to the `handleSubmit` from `UserSettings` and put that logic in
 // this function. It should accept: dispatch, user, and updates
+const updateUser = (dispatch, user, updates) => {
+  dispatch({type: 'start update', updates})
+  
+  // Here the return is for users to continue the promise chain.
+  // A plus modification since the origin doesn't give a return.
+  return userClient.updateUser(user, updates)
+    .then(
+      updatedUser => dispatch({type: 'finish update', updatedUser}),
+      error => dispatch({type: 'fail update', error}),
+    )
+
+  
+  // Go to see the final implementation of this function.
+  // Note, the video throws error directly,
+  // not like the final, throw a promise reject instead.
+}
+
 
 // export {UserProvider, useUser}
 
@@ -198,3 +217,12 @@ function App() {
 }
 
 export default App
+
+
+
+// When I tested the example in the tutorial using CodeSandbox,
+// it always rendered twice for all the actions.
+// Then I just used a default React templete to test rendering,
+// It also rendered twice.
+// Guess this weird behavior is from CodeSandbox, but not React.
+// The same code in the tutorial env only renders once.
