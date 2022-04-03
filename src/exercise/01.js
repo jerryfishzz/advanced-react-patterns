@@ -54,7 +54,6 @@ function userReducer(state, action) {
 }
 
 function UserProvider({children}) {
-  console.log('first')
   const {user} = useAuth()
   const [state, dispatch] = React.useReducer(userReducer, {
     status: null,
@@ -62,7 +61,7 @@ function UserProvider({children}) {
     storedUser: user,
     user,
   })
-  console.log(state)
+  
   const value = [state, dispatch]
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
@@ -117,11 +116,13 @@ function UserSettings() {
   function handleSubmit(event) {
     event.preventDefault()
     // 🐨 move the following logic to the `updateUser` function you create above
-    userDispatch({type: 'start update', updates: formState})
-    userClient.updateUser(user, formState).then(
-      updatedUser => userDispatch({type: 'finish update', updatedUser}),
-      error => userDispatch({type: 'fail update', error}),
-    )
+    // userDispatch({type: 'start update', updates: formState})
+    // userClient.updateUser(user, formState).then(
+    //   updatedUser => userDispatch({type: 'finish update', updatedUser}),
+    //   error => userDispatch({type: 'fail update', error}),
+    // )
+
+    updateUser(userDispatch, user, formState)
   }
 
   return (
