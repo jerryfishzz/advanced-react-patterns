@@ -40,12 +40,32 @@ const ToggleOff = ({ on, children }) => !on ? <>{children}</> : null
 // const ToggleButton = () => null
 const ToggleButton = ({ on, toggle }) => <Switch on={on} onClick={toggle} />
 
+
+/* 
+// Exercise
 function App() {
   return (
     <div>
       <Toggle>
         <ToggleOn>The button is on</ToggleOn>
         <ToggleOff>The button is off</ToggleOff>
+        <ToggleButton />
+      </Toggle>
+    </div>
+  )
+}
+ */
+
+
+// Extra 1
+// Go to final and tutorial video to check the solution
+function App() {
+  return (
+    <div>
+      <Toggle>
+        <ToggleOn>The button is on</ToggleOn>
+        <ToggleOff>The button is off</ToggleOff>
+        <span>Hello</span>
         <ToggleButton />
       </Toggle>
     </div>
