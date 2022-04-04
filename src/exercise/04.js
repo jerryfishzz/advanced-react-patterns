@@ -11,7 +11,11 @@ function useToggle() {
   // 🐨 Add a property called `togglerProps`. It should be an object that has
   // `aria-pressed` and `onClick` properties.
   // 💰 {'aria-pressed': on, onClick: toggle}
-  return {on, toggle}
+  const togglerProps = {'aria-pressed': on, onClick: toggle}
+
+  // Still pass on and toggle so people can use them
+  // if their situation is not matched with togglerProps.
+  return {on, toggle, togglerProps}
 }
 
 function App() {
