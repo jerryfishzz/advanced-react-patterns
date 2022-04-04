@@ -18,6 +18,9 @@ function useToggle() {
   return {on, toggle, togglerProps}
 }
 
+
+/* 
+// Exercise
 function App() {
   const {on, togglerProps} = useToggle()
   return (
@@ -25,6 +28,29 @@ function App() {
       <Switch on={on} {...togglerProps} />
       <hr />
       <button aria-label="custom-button" {...togglerProps}>
+        {on ? 'on' : 'off'}
+      </button>
+    </div>
+  )
+}
+ */
+
+
+// Extra 1
+// The 'compose' referred in the tutorial means running both of the functions
+// from the useToggle and users.
+// Go to see the final to get the implementation.
+function App() {
+  const {on, togglerProps} = useToggle()
+  return (
+    <div>
+      <Switch on={on} {...togglerProps} />
+      <hr />
+      <button
+        aria-label="custom-button"
+        {...togglerProps}
+        onClick={() => console.info('onButtonClick')}
+      >
         {on ? 'on' : 'off'}
       </button>
     </div>
