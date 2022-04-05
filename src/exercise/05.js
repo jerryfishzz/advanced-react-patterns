@@ -6,6 +6,9 @@ import {Switch} from '../switch'
 
 const callAll = (...fns) => (...args) => fns.forEach(fn => fn?.(...args))
 
+// Create an actionType object to store actions to avoid typo
+// For details, go to check the final.
+
 function toggleReducer(state, {type, initialState}) {
   switch (type) {
     case 'toggle': {
@@ -64,6 +67,8 @@ function App() {
   const [timesClicked, setTimesClicked] = React.useState(0)
   const clickedTooMuch = timesClicked >= 4
 
+  /* 
+  // Exercise
   function toggleStateReducer(state, action) {
     switch (action.type) {
       case 'toggle': {
@@ -79,6 +84,15 @@ function App() {
         throw new Error(`Unsupported type: ${action.type}`)
       }
     }
+  }
+   */
+
+  // Extra 1
+  function toggleStateReducer(state, action) {
+    if (action.type === 'toggle' && timesClicked >= 4) {
+      return {on: state.on}
+    }
+    return toggleReducer(state, action)
   }
 
   const {on, getTogglerProps, getResetterProps} = useToggle({
