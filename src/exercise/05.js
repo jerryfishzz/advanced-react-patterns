@@ -26,7 +26,7 @@ function toggleReducer(state, {type, initialState}) {
 // 🐨 add a new option called `reducer` that defaults to `toggleReducer`
 function useToggle({initialOn = false, reducer = toggleReducer} = {}) {
   // This useRed fixes the initial state to the value when the component is mounting.
-  // initialOn probabaly changes in re-rendering. So useRef helps fixing the value.
+  // initialOn probabaly changes in re-rendering. So useRef helps lock the value.
   const {current: initialState} = React.useRef({on: initialOn})
 
   // 🐨 instead of passing `toggleReducer` here, pass the `reducer` that's
